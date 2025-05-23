@@ -6,7 +6,7 @@ Sistema Java com interface gráfica para verificar a conformidade ambiental de e
 
 ### Git instalado 
 
-![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)
+[![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)(https://git-scm.com/downloads/win)]
 
 ### Java instalado
 
