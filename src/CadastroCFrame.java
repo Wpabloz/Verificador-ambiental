@@ -33,7 +33,7 @@ public class CadastroCFrame extends JFrame {
         containerPanel.setBackground(Color.WHITE);
         containerPanel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
-                BorderFactory.createEmptyBorder(40, 40, 40, 40)
+                BorderFactory.createEmptyBorder(40, 0, 40, 0)
         ));
         containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));
 
