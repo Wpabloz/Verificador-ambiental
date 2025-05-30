@@ -1,14 +1,20 @@
+import javax.swing.*;
+import java.awt.*;
+
 public class Main {
     public static void main(String[] args) {
+        // Criação do JFrame
+       LoginFrame loginPage = new LoginFrame();
+       //loginPage.setVisible(true);
 
-        System.out.println("Teste Branch 00");
-        System.out.println("Teste Branch 2");
-        System.out.println("Teste Branch 3");
-        System.out.println("Teste Branch 4");
-        System.out.println("Teste Branch 5");
+       CadastroCFrame cadastroPage = new CadastroCFrame();
+       //cadastroPage.setVisible(true);
 
-        System.out.println("Flamengo 2 x 0 Vasco");
-        
+       CadastroEFrame cadastroEmpresaPage = new CadastroEFrame();
+       //cadastroEmpresaPage.setVisible(true);
+
+       InicialFrame inicialPage = new InicialFrame();
+       inicialPage.setVisible(true);
 
     }
 }
