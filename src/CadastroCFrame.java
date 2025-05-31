@@ -1,9 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CadastroCFrame extends JFrame {
+    CardLayout cardLayout = new CardLayout();
     JTextField nomeField, usuarioField, senhaField, cpfField, telefoneField;
-    JButton registerButton;
+    JButton registerButton = new JButton("Cadastrar");
 
     public CadastroCFrame(){
         inicializarComponentes();
@@ -148,21 +151,21 @@ public class CadastroCFrame extends JFrame {
         ));
 
         //Botão de cadastro
-        JButton cadastrarButton = new JButton("Cadastrar");
-        cadastrarButton.setFont(new Font("Roboto", Font.BOLD, 14));
-        cadastrarButton.setForeground(Color.WHITE);
-        cadastrarButton.setBackground(Color.decode("#9DB984"));
-        cadastrarButton.setFocusPainted(false);
-        cadastrarButton.setBorderPainted(false);
-        cadastrarButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
-        cadastrarButton.setPreferredSize(new Dimension(250, 40));
-        cadastrarButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        registerButton.setFont(new Font("Roboto", Font.BOLD, 14));
+        registerButton.setForeground(Color.WHITE);
+        registerButton.setBackground(Color.decode("#9DB984"));
+        registerButton.setFocusPainted(false);
+        registerButton.setBorderPainted(false);
+        registerButton.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        registerButton.setPreferredSize(new Dimension(250, 40));
+        registerButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         //encapsula o botão de cadastro
         JPanel boxInputCadastro = new JPanel();
         boxInputCadastro.setBackground(Color.WHITE);
         boxInputCadastro.setLayout(new GridBagLayout());
-        boxInputCadastro.add(cadastrarButton);
+        boxInputCadastro.add(registerButton);
 
 
 
@@ -209,6 +212,34 @@ public class CadastroCFrame extends JFrame {
     }
 
     private void criarEventos() {
+
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nome = nomeField.getText();
+                String usuario = usuarioField.getText();
+                String senha = senhaField.getText();
+                String cpf = cpfField.getText();
+                String telefone = telefoneField.getText();
+
+                if(nome.isEmpty() || usuario.isEmpty() || senha.isEmpty() || cpf.isEmpty() || telefone.isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }else{
+                    //cria um novo usuário
+                    Usuario novoUsuario = new Cliente(nome, usuario, senha, cpf, telefone);
+
+
+                    JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucess", JOptionPane.INFORMATION_MESSAGE);
+
+
+                    PrincipalClienteFrame clientePanel = new PrincipalClienteFrame();
+                    clientePanel.setVisible(true);
+                    dispose();
+
+
+                }
+            }
+        });
     }
 
     private JPanel criaBoxInput(JTextField input, JLabel label){

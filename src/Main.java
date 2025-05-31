@@ -1,6 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
-
 public class Main {
     public static void main(String[] args) {
         // Criação do JFrame
@@ -15,6 +12,9 @@ public class Main {
 
        InicialFrame inicialPage = new InicialFrame();
        inicialPage.setVisible(true);
+
+       PrincipalClienteFrame clientePage = new PrincipalClienteFrame();
+       //clientePage.setVisible(true);
 
     }
 }

@@ -6,8 +6,8 @@ public class Empresa extends Usuario {
     private Selo seloVerde;
 
     //construtor
-    public Empresa(String id, String nome, String username, String senha, String cnpj, Endereco endereco, Atividade atividade) {
-        super(id, nome, username, senha);
+    public Empresa(String nome, String username, String senha, String cnpj, Endereco endereco, Atividade atividade) {
+        super(nome, username, senha);
         this.cnpj = cnpj;
         this.endereco = endereco;
         this.atividade = atividade;
