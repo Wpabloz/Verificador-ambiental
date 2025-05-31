@@ -3,8 +3,8 @@ public class Cliente extends Usuario {
     private String numeroTel;
 
     //construtor
-    public Cliente(String id, String nome, String username, String senha, String cpf, String numeroTel) {
-        super(id, nome, username, senha);
+    public Cliente(String nome, String username, String senha, String cpf, String numeroTel) {
+        super(nome, username, senha);
         this.cpf = cpf;
         this.numeroTel = numeroTel;
     }
