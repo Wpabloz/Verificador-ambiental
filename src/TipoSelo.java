@@ -1,0 +1,19 @@
+public enum TipoSelo {
+    POBREZA,
+    FOME,
+    SAUDE,
+    EDUCACAO,
+    IGUALDADE,
+    AGUA,
+    ENERGIA,
+    TRABALHO,
+    INDUSTRIA,
+    DESIGUALDADE,
+    CIDADES,
+    CONSUMO,
+    CLIMA,
+    OCEANOS,
+    BIODIVERSIDADE,
+    PAZ,
+    PARCERIAS
+}
