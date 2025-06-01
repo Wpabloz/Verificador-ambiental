@@ -11,10 +11,17 @@ public class Main {
        //cadastroEmpresaPage.setVisible(true);
 
        InicialFrame inicialPage = new InicialFrame();
-       inicialPage.setVisible(true);
+       //inicialPage.setVisible(true);
 
        PrincipalClienteFrame clientePage = new PrincipalClienteFrame();
        //clientePage.setVisible(true);
+
+        ChecklistFrame checklistPage = new ChecklistFrame(TipoSelo.AGUA);;
+        // checklistPage.setVisible(true);
+
+        DashboardFrame dashboardPage = new DashboardFrame();
+        dashboardPage.setVisible(true);
+
 
     }
 }

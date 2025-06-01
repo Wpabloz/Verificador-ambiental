@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CadastroEFrame extends JFrame {
     JTextField nomeField, usuarioField, senhaField, cnpjField;
@@ -200,6 +201,63 @@ public class CadastroEFrame extends JFrame {
     }
 
     private void criarEventos() {
+
+        registerButton.addActionListener(e -> {
+
+            String nome = nomeField.getText();
+            String usuario = usuarioField.getText();
+            String senha = senhaField.getText();
+            String cnpj = cnpjField.getText();
+            Atividade atividade = Atividade.valueOf(atividadeComboBox.getSelectedItem().toString());
+
+            if (nome.isEmpty() || usuario.isEmpty() || senha.isEmpty() || cnpj.isEmpty() || atividade == null) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+            } else {
+                Empresa empresa = new Empresa(nome, usuario, senha, cnpj, atividade);
+
+
+                JOptionPane.showMessageDialog(null, "Empresa cadastrada com sucesso!");
+
+                JDialog escolhaSelo = new JDialog(this, "Tipo de selo", true);
+                escolhaSelo.setSize(400, 150);
+                escolhaSelo.setLayout(new FlowLayout());
+                escolhaSelo.setLocationRelativeTo(this);
+
+                escolhaSelo.add(new JLabel("Escolha o tipo de selo:"));
+
+                    //ComboBox
+                String[] opcoesSelo = new String[TipoSelo.values().length];
+                TipoSelo[] selos = TipoSelo.values();
+                for (int i = 0; i < selos.length; i++) {
+                    opcoesSelo[i] = selos[i].toString();
+                }
+                JComboBox<String> seloComboBox = new JComboBox<>(opcoesSelo);
+                seloComboBox.setFont(new Font("Roboto", Font.PLAIN, 14));
+                seloComboBox.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+                seloComboBox.setMinimumSize(new Dimension(Integer.MIN_VALUE, 35));
+                seloComboBox.setPreferredSize(new Dimension(100, 35));
+
+
+
+                JButton confirmarButton = new JButton("Confirmar");
+
+                confirmarButton.addActionListener(event -> {
+                    TipoSelo selo = TipoSelo.valueOf(seloComboBox.getSelectedItem().toString());
+                    ChecklistFrame checklistFrame = new ChecklistFrame(selo);
+                    checklistFrame.setVisible(true);
+
+                    escolhaSelo.dispose();
+                    dispose();
+                });
+
+                escolhaSelo.add(seloComboBox);
+                escolhaSelo.add(confirmarButton);
+                escolhaSelo.setVisible(true);
+
+
+
+            }
+        });
     }
 
     private JPanel criaBoxInput(Component input, JLabel label){
