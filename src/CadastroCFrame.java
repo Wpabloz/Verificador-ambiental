@@ -2,11 +2,33 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class CadastroCFrame extends JFrame {
     CardLayout cardLayout = new CardLayout();
     JTextField nomeField, usuarioField, senhaField, cpfField, telefoneField;
     JButton registerButton = new JButton("Cadastrar");
+
+    private void salvarCliente(String nome, String usuario, String senha, String cpf, String telefone) {
+        try (FileWriter fw = new FileWriter("cliente.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter pw = new PrintWriter(bw)) {
+
+            String linha = "Dados do cliente: " + nome + " | " + usuario + " | " + senha + " | " + cpf + " | " + telefone;
+            pw.println(linha);
+
+        } catch (IOException erro) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar cliente: " + erro.getMessage());
+        }
+
+    }
+
+
+
+
 
     public CadastroCFrame(){
         inicializarComponentes();
@@ -227,6 +249,9 @@ public class CadastroCFrame extends JFrame {
                 }else{
                     //cria um novo usuário
                     Usuario novoUsuario = new Cliente(nome, usuario, senha, cpf, telefone);
+                    System.out.println(novoUsuario);
+
+                    salvarCliente(nome, usuario, senha, cpf, telefone);
 
 
                     JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucess", JOptionPane.INFORMATION_MESSAGE);

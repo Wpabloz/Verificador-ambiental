@@ -10,6 +10,8 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
+
+
     // Gets e Sets necessários
 
     public String getNome() {
