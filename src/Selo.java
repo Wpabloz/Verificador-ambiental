@@ -3,6 +3,7 @@ import java.time.LocalDate;
 public class Selo {
     private LocalDate emissao;
     private boolean valido;
+    private TipoSelo tipoSelo;
 
     //construtor
     public Selo(LocalDate emissao, boolean valido) {
@@ -25,5 +26,13 @@ public class Selo {
 
     public void setEmissao(LocalDate emissao) {
         this.emissao = emissao;
+    }
+
+    public TipoSelo getTipoSelo() {
+        return tipoSelo;
+    }
+
+    public void setTipoSelo(TipoSelo tipoSelo) {
+        this.tipoSelo = tipoSelo;
     }
 }

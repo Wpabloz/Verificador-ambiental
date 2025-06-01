@@ -4,11 +4,11 @@ public class Empresa extends Usuario {
     private boolean statusAmbiental;
     private Selo seloVerde;
 
+
     //construtor
     public Empresa(String nome, String username, String senha, String cnpj, Atividade atividade) {
         super(nome, username, senha);
         this.cnpj = cnpj;
-
         this.atividade = atividade;
         this.statusAmbiental = false;  // padrão
     }
