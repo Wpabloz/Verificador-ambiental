@@ -1,15 +1,14 @@
 public class Empresa extends Usuario {
     private String cnpj;
-    private Endereco endereco;
     private Atividade atividade;
     private boolean statusAmbiental;
     private Selo seloVerde;
 
     //construtor
-    public Empresa(String nome, String username, String senha, String cnpj, Endereco endereco, Atividade atividade) {
+    public Empresa(String nome, String username, String senha, String cnpj, Atividade atividade) {
         super(nome, username, senha);
         this.cnpj = cnpj;
-        this.endereco = endereco;
+
         this.atividade = atividade;
         this.statusAmbiental = false;  // padrão
     }
@@ -19,9 +18,7 @@ public class Empresa extends Usuario {
         return cnpj;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
+
 
     public Atividade getAtividade() {
         return atividade;
