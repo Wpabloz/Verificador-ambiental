@@ -9,6 +9,11 @@ public class Cliente extends Usuario {
         this.numeroTel = numeroTel;
     }
 
+    @Override
+    public String toString() {
+        return "Nome: " + nome + " | " + "Usuário: " + username + " | " + " Senha: " + senha + " | " + "CPF: " + cpf + " | " + "Telefone: "+ numeroTel;
+    }
+
     // Gets e Sets
     public String getCpf() {
         return cpf;
