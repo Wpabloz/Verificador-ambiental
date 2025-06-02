@@ -327,4 +327,8 @@ public class CadastroEFrame extends JFrame {
         }
         return null;
     }
+
+    public static void editarCliente(Empresa empresa, Empresa empresaEditada) {
+
+    }
 }

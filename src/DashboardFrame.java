@@ -9,7 +9,7 @@ public class DashboardFrame extends JFrame {
     public DashboardFrame(Empresa empresaLogada) {
         inicializarComponentes();
         configurarLayout(empresaLogada);
-        configurarEventos();
+        configurarEventos(empresaLogada);
 
     }
 
@@ -133,12 +133,19 @@ public class DashboardFrame extends JFrame {
         add(mainPanel);
     }
 
-    private void configurarEventos() {
+    private void configurarEventos(Empresa empresaLogada) {
 
         sairButton.addActionListener(e ->{
             InicialFrame inicialPage = new InicialFrame();
             inicialPage.setVisible(true);
             dispose();
+        });
+
+        editarButton.addActionListener(e ->{
+            JDialog dialog = new EditarDialog(this, empresaLogada);
+            dialog.setVisible(true);
+
+
         });
 
 
