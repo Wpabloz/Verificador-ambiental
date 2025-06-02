@@ -249,7 +249,13 @@ public class CadastroCFrame extends JFrame {
 
                 if(nome.isEmpty() || usuario.isEmpty() || senha.isEmpty() || cpf.isEmpty() || telefone.isEmpty()){
                     JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
-                }else{
+                }else if (usuario.length() < 5){
+                    JOptionPane.showMessageDialog(null, "O usuário deve ter pelo menos 5 caracteres!", "Erro", JOptionPane.ERROR_MESSAGE);
+                } else if (senha.length() < 8) {
+                    JOptionPane.showMessageDialog(null, "A senha deve ter no mínimo 8 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
+                }else if(cpf.length() < 11){
+                    JOptionPane.showMessageDialog(null, "O CPF deve ter 11 dígitos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                } else{
                     //cria um novo usuário
                     Usuario novoUsuario = new Cliente(nome, usuario, senha, cpf, telefone);
                     System.out.println(novoUsuario);

@@ -213,7 +213,13 @@ public class CadastroEFrame extends JFrame {
             Atividade atividade = Atividade.valueOf(atividadeComboBox.getSelectedItem().toString());
 
             if (nome.isEmpty() || usuario.isEmpty() || senha.isEmpty() || cnpj.isEmpty() || atividade == null) {
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else if (usuario.length() < 5) {
+                JOptionPane.showMessageDialog(null, "O nome de usuário deve ter no mínimo 5 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else if (senha.length() < 8){
+                JOptionPane.showMessageDialog(null, "A senha deve ter no mínimo 8 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else if (cnpj.length() != 14) {
+                JOptionPane.showMessageDialog(null, "O CNPJ deve ter 14 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
             } else {
                 Empresa empresa = new Empresa(nome, usuario, senha, cnpj, atividade);
 
