@@ -12,12 +12,12 @@ public class CadastroCFrame extends JFrame {
     JTextField nomeField, usuarioField, senhaField, cpfField, telefoneField;
     JButton registerButton = new JButton("Cadastrar");
 
-    protected void salvarCliente(String nome, String usuario, String senha, String cpf, String telefone) {
+    protected void salvarCliente(Cliente cliente) {
         try (FileWriter fw = new FileWriter("cliente.txt", true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter pw = new PrintWriter(bw)) {
 
-            String linha = "Dados do cliente: " + nome + " | " + usuario + " | " + senha + " | " + cpf + " | " + telefone;
+            String linha = "Dados do cliente: " + cliente.getNome() + " | " + cliente.getUsername() + " | " + cliente.getSenha() + " | " + cliente.getCpf() + " | " + cliente.getNumeroTel();
             pw.println(linha);
 
         } catch (IOException erro) {
@@ -253,14 +253,14 @@ public class CadastroCFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "O usuário deve ter pelo menos 5 caracteres!", "Erro", JOptionPane.ERROR_MESSAGE);
                 } else if (senha.length() < 8) {
                     JOptionPane.showMessageDialog(null, "A senha deve ter no mínimo 8 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
-                }else if(cpf.length() < 11){
+                }else if(cpf.length() != 11){
                     JOptionPane.showMessageDialog(null, "O CPF deve ter 11 dígitos!", "Erro", JOptionPane.ERROR_MESSAGE);
                 } else{
                     //cria um novo usuário
-                    Usuario novoUsuario = new Cliente(nome, usuario, senha, cpf, telefone);
+                    Cliente novoUsuario = new Cliente(nome, usuario, senha, cpf, telefone);
                     System.out.println(novoUsuario);
 
-                    salvarCliente(nome, usuario, senha, cpf, telefone);
+                    salvarCliente(novoUsuario);
 
 
                     JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucess", JOptionPane.INFORMATION_MESSAGE);

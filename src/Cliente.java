@@ -5,7 +5,7 @@ public class Cliente extends Usuario {
     //construtor
     public Cliente(String nome, String username, String senha, String cpf, String numeroTel) {
         super(nome, username, senha);
-        this.cpf = cpf;
+        this.cpf =  formatarCpf(cpf.replaceAll("[^0-9]", ""));
         this.numeroTel = numeroTel;
     }
 
@@ -29,5 +29,12 @@ public class Cliente extends Usuario {
 
     public void setNumeroTel(String numeroTel) {
         this.numeroTel = numeroTel;
+    }
+
+    private String formatarCpf(String cpfNumerico) {
+        return cpfNumerico.substring(0, 3) + "." +
+                cpfNumerico.substring(3, 6) + "." +
+                cpfNumerico.substring(6, 9) + "-" +
+                cpfNumerico.substring(9, 11);
     }
 }
