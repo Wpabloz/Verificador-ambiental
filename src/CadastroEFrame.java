@@ -3,7 +3,8 @@ import java.awt.*;
 
 
 public class CadastroEFrame extends JFrame {
-    JTextField nomeField, usuarioField, senhaField, cnpjField;
+    JTextField nomeField, usuarioField, cnpjField;
+    JPasswordField senhaField;
     JButton registerButton;
     JComboBox<String> atividadeComboBox;
 
@@ -107,7 +108,7 @@ public class CadastroEFrame extends JFrame {
         senhaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         //SenhaField
-        senhaField = new JTextField();
+        senhaField = new JPasswordField();
         senhaField.setFont(new Font("Roboto", Font.PLAIN, 14));
         senhaField.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         senhaField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));

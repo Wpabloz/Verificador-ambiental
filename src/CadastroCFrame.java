@@ -9,7 +9,8 @@ import java.io.PrintWriter;
 
 public class CadastroCFrame extends JFrame {
     CardLayout cardLayout = new CardLayout();
-    JTextField nomeField, usuarioField, senhaField, cpfField, telefoneField;
+    JTextField nomeField, usuarioField, cpfField, telefoneField;
+    JPasswordField senhaField;
     JButton registerButton = new JButton("Cadastrar");
 
     protected void salvarCliente(Cliente cliente) {
@@ -128,7 +129,7 @@ public class CadastroCFrame extends JFrame {
         senhaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         //SenhaField
-        senhaField = new JTextField();
+        senhaField = new JPasswordField();
         senhaField.setPreferredSize(new Dimension(100, 30));
         senhaField.setFont(new Font("Roboto", Font.PLAIN, 14));
         senhaField.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
