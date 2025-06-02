@@ -1,27 +1,12 @@
 public class Main {
     public static void main(String[] args) {
         // Criação do JFrame
-       LoginFrame loginPage = new LoginFrame();
-       //loginPage.setVisible(true);
-
-       CadastroCFrame cadastroPage = new CadastroCFrame();
-       //cadastroPage.setVisible(true);
-
-       CadastroEFrame cadastroEmpresaPage = new CadastroEFrame();
-       //cadastroEmpresaPage.setVisible(true);
-
-       InicialFrame inicialPage = new InicialFrame();
-       //inicialPage.setVisible(true);
-
-       PrincipalClienteFrame clientePage = new PrincipalClienteFrame();
-       //clientePage.setVisible(true);
-
-        ChecklistFrame checklistPage = new ChecklistFrame(TipoSelo.AGUA);;
-        // checklistPage.setVisible(true);
-
-        DashboardFrame dashboardPage = new DashboardFrame();
-        dashboardPage.setVisible(true);
-
+       try {
+            InicialFrame inicialPage = new InicialFrame();
+            inicialPage.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }
