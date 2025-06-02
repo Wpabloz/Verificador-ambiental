@@ -299,7 +299,7 @@ public class CadastroEFrame extends JFrame {
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter pw = new PrintWriter(bw)) {
 
-            String linha = "Dados da empresa: " + empresa.getNome() + " | " + empresa.getUsername() + " | " + empresa.getSenha() + " | " + empresa.getCnpj() + " | " + empresa.getAtividade();
+            String linha = empresa.getNome() + "," + empresa.getUsername() + "," + empresa.getSenha() + "," + empresa.getCnpj() + "," + empresa.getAtividade();
             pw.println(linha);
 
         } catch (IOException erro) {

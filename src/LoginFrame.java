@@ -1,3 +1,4 @@
+import javax.security.sasl.AuthenticationException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -161,15 +162,25 @@ public class LoginFrame extends JFrame {
         }
 
         // Aqui você pode implementar a lógica de autenticação
-        if (autenticarUsuario(usuario, senha)) {
+        if (autenticarUsuario(usuario, senha) == "cliente") {
             JOptionPane.showMessageDialog(this,
                     "Login realizado com sucesso!",
                     "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
 
             // Fechar janela de login e abrir próxima tela
+            PrincipalClienteFrame principalClienteFrame = new PrincipalClienteFrame();
+            principalClienteFrame.setVisible(true);
             dispose();
-            // new TelaPrincipal().setVisible(true);
+        }else if (autenticarUsuario(usuario,senha) == "empresa"){
+            JOptionPane.showMessageDialog(this,
+                    "Login realizado com sucesso!",
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            // Fechar janela de login e abrir próxima tela
+            new DashboardFrame().setVisible(true);
+            dispose();
         } else {
             JOptionPane.showMessageDialog(this,
                     "Usuário ou senha incorretos.",
@@ -188,23 +199,35 @@ public class LoginFrame extends JFrame {
 
 
 
-    private boolean autenticarUsuario(String usuario, String senha) throws IOException {
+    private String autenticarUsuario(String usuario, String senha) throws IOException {
         // Implementar aqui a lógica de autenticação
         // Exemplo simples para demonstração:
 
         BufferedReader reader = new BufferedReader(new FileReader("cliente.txt"));
+        BufferedReader readerEmpresa = new BufferedReader(new FileReader("empresa.txt"));
         String line = reader.readLine();
+        String lineEmpresa = readerEmpresa.readLine();
+
 
         while (line != null) {
             String[] parts = line.split(",");
+            String[] partsEmpresa = lineEmpresa.split(",");
+            System.out.println(parts[1]);
+            System.out.println(partsEmpresa[1]);
+            System.out.println(parts[2]);
+            System.out.println(partsEmpresa[2]);
             // Verifica se o usuário e a senha correspondem aos dados do arquivo
             if (parts.length == 5 && usuario.equals(parts[1]) && senha.equals(parts[2])) {
                 reader.close();
-                return true;
+                return "cliente";
+            }else if (partsEmpresa.length == 5 && usuario.equals(partsEmpresa[1]) && senha.equals(partsEmpresa[2])) {
+                readerEmpresa.close();
+                return "empresa";
             }
-            line = reader.readLine();
+                line = reader.readLine();
         }
-        return false;
+
+        return "";
     }
 
 
