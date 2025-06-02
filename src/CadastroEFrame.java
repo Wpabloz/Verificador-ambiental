@@ -1,9 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+
 
 public class CadastroEFrame extends JFrame {
-    JTextField nomeField, usuarioField, senhaField, cnpjField;
+    JTextField nomeField, usuarioField, cnpjField;
+    JPasswordField senhaField;
     JButton registerButton;
     JComboBox<String> atividadeComboBox;
 
@@ -107,7 +108,7 @@ public class CadastroEFrame extends JFrame {
         senhaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         //SenhaField
-        senhaField = new JTextField();
+        senhaField = new JPasswordField();
         senhaField.setFont(new Font("Roboto", Font.PLAIN, 14));
         senhaField.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         senhaField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));
@@ -176,7 +177,6 @@ public class CadastroEFrame extends JFrame {
         JPanel senhaBox = criaBoxInput(senhaField, senhaLabel);
         JPanel cnpjBox = criaBoxInput(cnpjField, cnpjLabel);
         JPanel atividadeBox = criaBoxInput(atividadeComboBox, atividadeLabel);
-        ;
 
         // Adicionando os componentes ao formulário
         formPanel.add(personalizaGridLayout(nomeBox, usuarioBox));
@@ -202,6 +202,69 @@ public class CadastroEFrame extends JFrame {
     }
 
     private void criarEventos() {
+
+        registerButton.addActionListener(e -> {
+
+            String nome = nomeField.getText();
+            String usuario = usuarioField.getText();
+            String senha = senhaField.getText();
+            String cnpj = cnpjField.getText();
+            Atividade atividade = Atividade.valueOf(atividadeComboBox.getSelectedItem().toString());
+
+            if (nome.isEmpty() || usuario.isEmpty() || senha.isEmpty() || cnpj.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else if (usuario.length() < 5) {
+                JOptionPane.showMessageDialog(null, "O nome de usuário deve ter no mínimo 5 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else if (senha.length() < 8){
+                JOptionPane.showMessageDialog(null, "A senha deve ter no mínimo 8 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else if (cnpj.length() != 14) {
+                JOptionPane.showMessageDialog(null, "O CNPJ deve ter 14 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Empresa empresa = new Empresa(nome, usuario, senha, cnpj, atividade);
+
+
+                JOptionPane.showMessageDialog(null, "Empresa cadastrada com sucesso!");
+
+                JDialog escolhaSelo = new JDialog(this, "Tipo de selo", true);
+                escolhaSelo.setSize(400, 150);
+                escolhaSelo.setLayout(new FlowLayout());
+                escolhaSelo.setLocationRelativeTo(this);
+
+                escolhaSelo.add(new JLabel("Escolha o tipo de selo:"));
+
+                    //ComboBox
+                String[] opcoesSelo = new String[TipoSelo.values().length];
+                TipoSelo[] selos = TipoSelo.values();
+                for (int i = 0; i < selos.length; i++) {
+                    opcoesSelo[i] = selos[i].toString();
+                }
+                JComboBox<String> seloComboBox = new JComboBox<>(opcoesSelo);
+                seloComboBox.setFont(new Font("Roboto", Font.PLAIN, 14));
+                seloComboBox.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
+                seloComboBox.setMinimumSize(new Dimension(Integer.MIN_VALUE, 35));
+                seloComboBox.setPreferredSize(new Dimension(100, 35));
+
+
+
+                JButton confirmarButton = new JButton("Confirmar");
+
+                confirmarButton.addActionListener(event -> {
+                    TipoSelo selo = TipoSelo.valueOf(seloComboBox.getSelectedItem().toString());
+                    ChecklistFrame checklistFrame = new ChecklistFrame(selo);
+                    checklistFrame.setVisible(true);
+
+                    escolhaSelo.dispose();
+                    dispose();
+                });
+
+                escolhaSelo.add(seloComboBox);
+                escolhaSelo.add(confirmarButton);
+                escolhaSelo.setVisible(true);
+
+
+
+            }
+        });
     }
 
     private JPanel criaBoxInput(Component input, JLabel label){

@@ -80,6 +80,7 @@ public class ChecklistFrame extends JFrame {
             // Por exemplo, você pode abrir uma nova janela ou realizar outras ações
             // Neste exemplo, vamos apenas exibir uma mensagem de confirmação
             JOptionPane.showMessageDialog(this, "Checklist concluído!");
+            DashboardFrame dashboardFrame = new DashboardFrame();
             dispose();
         });
     }

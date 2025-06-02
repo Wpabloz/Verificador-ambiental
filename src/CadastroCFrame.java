@@ -9,15 +9,16 @@ import java.io.PrintWriter;
 
 public class CadastroCFrame extends JFrame {
     CardLayout cardLayout = new CardLayout();
-    JTextField nomeField, usuarioField, senhaField, cpfField, telefoneField;
+    JTextField nomeField, usuarioField, cpfField, telefoneField;
+    JPasswordField senhaField;
     JButton registerButton = new JButton("Cadastrar");
 
-    protected void salvarCliente(String nome, String usuario, String senha, String cpf, String telefone) {
+    protected void salvarCliente(Cliente cliente) {
         try (FileWriter fw = new FileWriter("cliente.txt", true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter pw = new PrintWriter(bw)) {
 
-            String linha = "Dados do cliente: " + nome + " | " + usuario + " | " + senha + " | " + cpf + " | " + telefone;
+            String linha = "Dados do cliente: " + cliente.getNome() + " | " + cliente.getUsername() + " | " + cliente.getSenha() + " | " + cliente.getCpf() + " | " + cliente.getNumeroTel();
             pw.println(linha);
 
         } catch (IOException erro) {
@@ -128,7 +129,7 @@ public class CadastroCFrame extends JFrame {
         senhaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         //SenhaField
-        senhaField = new JTextField();
+        senhaField = new JPasswordField();
         senhaField.setPreferredSize(new Dimension(100, 30));
         senhaField.setFont(new Font("Roboto", Font.PLAIN, 14));
         senhaField.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
@@ -249,12 +250,20 @@ public class CadastroCFrame extends JFrame {
 
                 if(nome.isEmpty() || usuario.isEmpty() || senha.isEmpty() || cpf.isEmpty() || telefone.isEmpty()){
                     JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
-                }else{
+                }else if (usuario.length() < 5){
+                    JOptionPane.showMessageDialog(null, "O usuário deve ter pelo menos 5 caracteres!", "Erro", JOptionPane.ERROR_MESSAGE);
+                } else if (senha.length() < 8) {
+                    JOptionPane.showMessageDialog(null, "A senha deve ter no mínimo 8 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
+                }else if(cpf.length() != 11){
+                    JOptionPane.showMessageDialog(null, "O CPF deve ter 11 dígitos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                } else if (telefone.length() != 11){
+                    JOptionPane.showMessageDialog(null, "O telefone deve ter 11 dígitos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                } else{
                     //cria um novo usuário
-                    Usuario novoUsuario = new Cliente(nome, usuario, senha, cpf, telefone);
+                    Cliente novoUsuario = new Cliente(nome, usuario, senha, cpf, telefone);
                     System.out.println(novoUsuario);
 
-                    salvarCliente(nome, usuario, senha, cpf, telefone);
+                    salvarCliente(novoUsuario);
 
 
                     JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!", "Sucess", JOptionPane.INFORMATION_MESSAGE);
