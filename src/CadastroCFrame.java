@@ -13,19 +13,7 @@ public class CadastroCFrame extends JFrame {
     JPasswordField senhaField;
     JButton registerButton = new JButton("Cadastrar");
 
-    protected void salvarCliente(Cliente cliente) {
-        try (FileWriter fw = new FileWriter("cliente.txt", true);
-             BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter pw = new PrintWriter(bw)) {
 
-            String linha = "Dados do cliente: " + cliente.getNome() + " | " + cliente.getUsername() + " | " + cliente.getSenha() + " | " + cliente.getCpf() + " | " + cliente.getNumeroTel();
-            pw.println(linha);
-
-        } catch (IOException erro) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar cliente: " + erro.getMessage());
-        }
-
-    }
 
 
     
@@ -295,6 +283,20 @@ public class CadastroCFrame extends JFrame {
         gridPanel.add(boxInputEsq);
         gridPanel.add(boxInputDir);
         return gridPanel;
+    }
+
+    protected void salvarCliente(Cliente cliente) {
+        try (FileWriter fw = new FileWriter("cliente.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter pw = new PrintWriter(bw)) {
+
+            String linha = "Dados do cliente: " + cliente.getNome() + " | " + cliente.getUsername() + " | " + cliente.getSenha() + " | " + cliente.getCpf() + " | " + cliente.getNumeroTel();
+            pw.println(linha);
+
+        } catch (IOException erro) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar cliente: " + erro.getMessage());
+        }
+
     }
 
 }
