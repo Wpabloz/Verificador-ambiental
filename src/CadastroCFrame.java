@@ -12,7 +12,7 @@ public class CadastroCFrame extends JFrame {
     JTextField nomeField, usuarioField, senhaField, cpfField, telefoneField;
     JButton registerButton = new JButton("Cadastrar");
 
-    private void salvarCliente(String nome, String usuario, String senha, String cpf, String telefone) {
+    protected void salvarCliente(String nome, String usuario, String senha, String cpf, String telefone) {
         try (FileWriter fw = new FileWriter("cliente.txt", true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter pw = new PrintWriter(bw)) {
@@ -25,6 +25,9 @@ public class CadastroCFrame extends JFrame {
         }
 
     }
+
+
+    
 
 
 
