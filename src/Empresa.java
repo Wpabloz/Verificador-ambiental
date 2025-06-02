@@ -8,7 +8,7 @@ public class Empresa extends Usuario {
     //construtor
     public Empresa(String nome, String username, String senha, String cnpj, Atividade atividade) {
         super(nome, username, senha);
-        this.cnpj = cnpj;
+        this.cnpj = formatarCNPJ(cnpj.replaceAll("[^0-9]", ""));
         this.atividade = atividade;
         this.statusAmbiental = false;  // padrão
     }
@@ -43,5 +43,22 @@ public class Empresa extends Usuario {
         return !statusAmbiental;
     }
 
+    private String formatarCNPJ(String s) {
+        return s.substring(0, 2) + "." +
+                s.substring(2, 5) + "." +
+                s.substring(5, 8) + "/" +
+                s.substring(8, 12) + "-" +
+                s.substring(12, 14);
+    }
 
+    @Override
+    public String toString() {
+        return "Empresa{" +
+                "atividade=" + atividade +
+                ", cnpj='" + cnpj + '\'' +
+                ", nome='" + nome + '\'' +
+                ", senha='" + senha + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }
