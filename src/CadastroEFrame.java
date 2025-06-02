@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class CadastroEFrame extends JFrame {
     JTextField nomeField, usuarioField, cnpjField;
@@ -259,7 +256,12 @@ public class CadastroEFrame extends JFrame {
 
                 confirmarButton.addActionListener(event -> {
                     TipoSelo selo = TipoSelo.valueOf(seloComboBox.getSelectedItem().toString());
-                    ChecklistFrame checklistFrame = new ChecklistFrame(selo);
+                    ChecklistFrame checklistFrame = null;
+                    try {
+                        checklistFrame = new ChecklistFrame(selo, verificaEmpresaLogada());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     checklistFrame.setVisible(true);
 
                     escolhaSelo.dispose();
@@ -308,4 +310,21 @@ public class CadastroEFrame extends JFrame {
 
     }
 
+    private Empresa verificaEmpresaLogada() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("empresa.txt"));
+        String line = reader.readLine();
+
+        while (line != null) {
+            String[] parts = line.split(",");
+            if (parts.length == 5 && parts[1].equals(usuarioField.getText())) {
+                Atividade atividade = Atividade.valueOf(parts[4]);
+
+                Empresa empresa = new Empresa(parts[0], parts[1], parts[2], parts[3], atividade);
+                reader.close();
+                return empresa;
+            }
+            line = reader.readLine();
+        }
+        return null;
+    }
 }

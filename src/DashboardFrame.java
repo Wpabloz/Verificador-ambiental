@@ -6,10 +6,11 @@ public class DashboardFrame extends JFrame {
     JButton editarButton, sairButton, tentarButton;
 
 
-    public DashboardFrame() {
+    public DashboardFrame(Empresa empresaLogada) {
         inicializarComponentes();
-        configurarLayout();
+        configurarLayout(empresaLogada);
         configurarEventos();
+
     }
 
     private void inicializarComponentes() {
@@ -24,7 +25,7 @@ public class DashboardFrame extends JFrame {
         getContentPane().setBackground(Color.decode("#9DB984"));
     }
 
-    private void configurarLayout() {
+    private void configurarLayout(Empresa empresaLogada) {
         setLayout(new BorderLayout());
 
         mainPanel = new JPanel();
@@ -52,25 +53,25 @@ public class DashboardFrame extends JFrame {
         ));
 
         // Adicione o nome da empresa aqui
-        JLabel nomeEmpresaLabel = new JLabel("Nome da Empresa: Empresa Logada");
+        JLabel nomeEmpresaLabel = new JLabel("Nome da Empresa: " + empresaLogada.getNome());
         nomeEmpresaLabel.setFont(new Font("Roboto", Font.BOLD, 18));
         nomeEmpresaLabel.setForeground(Color.decode("#2E7D32"));
         cardEmpresa.add(nomeEmpresaLabel);
 
         // CNPJ
-        JLabel cnpjLabel = new JLabel("CNPJ: 12.***.***/****-90");
+        JLabel cnpjLabel = new JLabel("CNPJ: " + empresaLogada.getCnpj());
         cnpjLabel.setFont(new Font("Roboto", Font.PLAIN, 16));
         cnpjLabel.setForeground(Color.decode("#2E7D32"));
         cardEmpresa.add(cnpjLabel);
 
         // Atividade
-        JLabel atividadeLabel = new JLabel("Atividade: Saúde");
+        JLabel atividadeLabel = new JLabel("Atividade: " + empresaLogada.getAtividade());
         atividadeLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
         atividadeLabel.setForeground(Color.decode("#2E7D32"));
         cardEmpresa.add(atividadeLabel);
 
         // Usuário
-        JLabel usuarioLabel = new JLabel("Usuário: Usuário Logado");
+        JLabel usuarioLabel = new JLabel("Usuário: " + empresaLogada.getUsername());
         usuarioLabel.setFont(new Font("Roboto", Font.PLAIN, 14));
         usuarioLabel.setForeground(Color.decode("#2E7D32"));
         cardEmpresa.add(usuarioLabel);

@@ -6,10 +6,10 @@ public class ChecklistFrame extends JFrame {
     JScrollPane scrollPane;
     JPanel mainPanel;
 
-    public ChecklistFrame(TipoSelo selo){
+    public ChecklistFrame(TipoSelo selo, Empresa empresaLogada) {
         inicializarComponentes();
         configurarLayout(selo);
-        configurarEventos();
+        configurarEventos(empresaLogada);
     }
 
     private void inicializarComponentes() {
@@ -73,14 +73,15 @@ public class ChecklistFrame extends JFrame {
         add(scrollPane.add(mainPanel), BorderLayout.CENTER);
     }
 
-    private void configurarEventos() {
+    private void configurarEventos(Empresa empresaLogada) {
 
         btnContinuar.addActionListener(e -> {
             // Lógica para continuar o processo
             // Por exemplo, você pode abrir uma nova janela ou realizar outras ações
             // Neste exemplo, vamos apenas exibir uma mensagem de confirmação
             JOptionPane.showMessageDialog(this, "Checklist concluído!");
-            DashboardFrame dashboardFrame = new DashboardFrame();
+            DashboardFrame dashboardFrame = new DashboardFrame(empresaLogada);
+            dashboardFrame.setVisible(true);
             dispose();
         });
     }

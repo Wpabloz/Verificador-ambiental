@@ -139,7 +139,7 @@ public class LoginFrame extends JFrame {
         // Configuração do layout do painel principal
         loginButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 try {
                     realizarLogin();
                 } catch (IOException ex) {
@@ -172,14 +172,14 @@ public class LoginFrame extends JFrame {
             PrincipalClienteFrame principalClienteFrame = new PrincipalClienteFrame();
             principalClienteFrame.setVisible(true);
             dispose();
-        }else if (autenticarUsuario(usuario,senha) == "empresa"){
+        } else if (autenticarUsuario(usuario, senha) == "empresa") {
             JOptionPane.showMessageDialog(this,
                     "Login realizado com sucesso!",
                     "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
 
             // Fechar janela de login e abrir próxima tela
-            new DashboardFrame().setVisible(true);
+            new DashboardFrame(verificaEmpresaLogada()).setVisible(true);
             dispose();
         } else {
             JOptionPane.showMessageDialog(this,
@@ -193,10 +193,7 @@ public class LoginFrame extends JFrame {
         }
 
 
-
-
     }
-
 
 
     private String autenticarUsuario(String usuario, String senha) throws IOException {
@@ -220,15 +217,31 @@ public class LoginFrame extends JFrame {
             if (parts.length == 5 && usuario.equals(parts[1]) && senha.equals(parts[2])) {
                 reader.close();
                 return "cliente";
-            }else if (partsEmpresa.length == 5 && usuario.equals(partsEmpresa[1]) && senha.equals(partsEmpresa[2])) {
+            } else if (partsEmpresa.length == 5 && usuario.equals(partsEmpresa[1]) && senha.equals(partsEmpresa[2])) {
                 readerEmpresa.close();
                 return "empresa";
             }
-                line = reader.readLine();
+            line = reader.readLine();
         }
 
         return "";
     }
 
+    private Empresa verificaEmpresaLogada() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("empresa.txt"));
+        String line = reader.readLine();
 
+        while (line != null) {
+            String[] parts = line.split(",");
+            if (parts.length == 5 && parts[1].equals(usuarioField.getText())) {
+                Atividade atividade = Atividade.valueOf(parts[4]);
+
+                Empresa empresa = new Empresa(parts[0], parts[1], parts[2], parts[3], atividade);
+                reader.close();
+                return empresa;
+            }
+            line = reader.readLine();
+        }
+        return null;
+    }
 }
