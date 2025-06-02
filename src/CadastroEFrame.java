@@ -1,12 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
-
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class CadastroEFrame extends JFrame {
     JTextField nomeField, usuarioField, cnpjField;
     JPasswordField senhaField;
     JButton registerButton;
     JComboBox<String> atividadeComboBox;
+
+
 
     
 
@@ -222,6 +227,10 @@ public class CadastroEFrame extends JFrame {
             } else {
                 Empresa empresa = new Empresa(nome, usuario, senha, cnpj, atividade);
 
+                salvarEmpresa(empresa);
+
+
+
 
                 JOptionPane.showMessageDialog(null, "Empresa cadastrada com sucesso!");
 
@@ -283,6 +292,20 @@ public class CadastroEFrame extends JFrame {
         gridPanel.add(boxInputEsq);
         gridPanel.add(boxInputDir);
         return gridPanel;
+    }
+
+    protected void salvarEmpresa(Empresa empresa) {
+        try (FileWriter fw = new FileWriter("empresa.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter pw = new PrintWriter(bw)) {
+
+            String linha = "Dados da empresa: " + empresa.getNome() + " | " + empresa.getUsername() + " | " + empresa.getSenha() + " | " + empresa.getCnpj() + " | " + empresa.getAtividade();
+            pw.println(linha);
+
+        } catch (IOException erro) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar cliente: " + erro.getMessage());
+        }
+
     }
 
 }
