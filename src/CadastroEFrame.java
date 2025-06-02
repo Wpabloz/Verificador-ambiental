@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class CadastroEFrame extends JFrame {
     JTextField nomeField, usuarioField, senhaField, cnpjField;
@@ -177,7 +176,6 @@ public class CadastroEFrame extends JFrame {
         JPanel senhaBox = criaBoxInput(senhaField, senhaLabel);
         JPanel cnpjBox = criaBoxInput(cnpjField, cnpjLabel);
         JPanel atividadeBox = criaBoxInput(atividadeComboBox, atividadeLabel);
-        ;
 
         // Adicionando os componentes ao formulário
         formPanel.add(personalizaGridLayout(nomeBox, usuarioBox));
@@ -212,7 +210,7 @@ public class CadastroEFrame extends JFrame {
             String cnpj = cnpjField.getText();
             Atividade atividade = Atividade.valueOf(atividadeComboBox.getSelectedItem().toString());
 
-            if (nome.isEmpty() || usuario.isEmpty() || senha.isEmpty() || cnpj.isEmpty() || atividade == null) {
+            if (nome.isEmpty() || usuario.isEmpty() || senha.isEmpty() || cnpj.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
             } else if (usuario.length() < 5) {
                 JOptionPane.showMessageDialog(null, "O nome de usuário deve ter no mínimo 5 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
