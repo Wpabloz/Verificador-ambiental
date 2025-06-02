@@ -3,6 +3,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
 
 public class LoginFrame extends JFrame {
@@ -138,12 +139,16 @@ public class LoginFrame extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                realizarLogin();
+                try {
+                    realizarLogin();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
 
-    private void realizarLogin() {
+    private void realizarLogin() throws IOException {
         String usuario = usuarioField.getText().trim();
         String senha = senhaField.getText().trim();
 
@@ -183,10 +188,23 @@ public class LoginFrame extends JFrame {
 
 
 
-    private boolean autenticarUsuario(String usuario, String senha) {
+    private boolean autenticarUsuario(String usuario, String senha) throws IOException {
         // Implementar aqui a lógica de autenticação
         // Exemplo simples para demonstração:
-        return usuario.equals("admin") && senha.equals("123456");
+
+        BufferedReader reader = new BufferedReader(new FileReader("cliente.txt"));
+        String line = reader.readLine();
+
+        while (line != null) {
+            String[] parts = line.split(",");
+            // Verifica se o usuário e a senha correspondem aos dados do arquivo
+            if (parts.length == 5 && usuario.equals(parts[1]) && senha.equals(parts[2])) {
+                reader.close();
+                return true;
+            }
+            line = reader.readLine();
+        }
+        return false;
     }
 
 

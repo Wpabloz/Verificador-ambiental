@@ -19,7 +19,7 @@ class CadastroCFrameTest {
                      BufferedWriter bw = new BufferedWriter(fw);
                      PrintWriter pw = new PrintWriter(bw)) {
 
-                    String linha = "Dados do cliente: " + cliente.getNome() + " | " + cliente.getUsername() + " | " + cliente.getSenha() + " | " + cliente.getCpf() + " | " + cliente.getNumeroTel();
+                    String linha = cliente.getNome() + "," + cliente.getUsername() + "," + cliente.getSenha() + "," + cliente.getCpf() + "," + cliente.getNumeroTel();
                     pw.println(linha);
 
                 } catch (IOException erro) {
@@ -52,7 +52,7 @@ class CadastroCFrameTest {
         String linha = br.readLine();
         br.close();
 
-        String esperado = "Dados do cliente: " + cliente.getNome() + " | " + cliente.getUsername() + " | " + cliente.getSenha() + " | " + cliente.getCpf() + " | " + cliente.getNumeroTel();
+        String esperado = cliente.getNome() + "," + cliente.getUsername() + "," + cliente.getSenha() + "," + cliente.getCpf() + "," + cliente.getNumeroTel();
         assertEquals(esperado, linha, "Conteúdo do arquivo não corresponde ao esperado.");
     }
 }
