@@ -8,6 +8,8 @@ public class CadastroEFrame extends JFrame {
     JButton registerButton;
     JComboBox<String> atividadeComboBox;
 
+    
+
     public CadastroEFrame(){
         inicializarComponentes();
         construirLayout();
