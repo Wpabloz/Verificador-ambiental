@@ -255,6 +255,8 @@ public class CadastroCFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "A senha deve ter no mínimo 8 dígitos", "Erro", JOptionPane.ERROR_MESSAGE);
                 }else if(cpf.length() != 11){
                     JOptionPane.showMessageDialog(null, "O CPF deve ter 11 dígitos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                } else if (telefone.length() != 11){
+                    JOptionPane.showMessageDialog(null, "O telefone deve ter 11 dígitos!", "Erro", JOptionPane.ERROR_MESSAGE);
                 } else{
                     //cria um novo usuário
                     Cliente novoUsuario = new Cliente(nome, usuario, senha, cpf, telefone);

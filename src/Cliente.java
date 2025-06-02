@@ -6,7 +6,7 @@ public class Cliente extends Usuario {
     public Cliente(String nome, String username, String senha, String cpf, String numeroTel) {
         super(nome, username, senha);
         this.cpf =  formatarCpf(cpf.replaceAll("[^0-9]", ""));
-        this.numeroTel = numeroTel;
+        this.numeroTel = formatarTelefone(numeroTel.replaceAll("[^0-9]", ""));
     }
 
     @Override
@@ -36,5 +36,11 @@ public class Cliente extends Usuario {
                 cpfNumerico.substring(3, 6) + "." +
                 cpfNumerico.substring(6, 9) + "-" +
                 cpfNumerico.substring(9, 11);
+    }
+
+    private String formatarTelefone(String telefoneNumerico) {
+        return "(" + telefoneNumerico.substring(0, 2) + ")" +
+                telefoneNumerico.substring(2, 7) + "-" +
+                telefoneNumerico.substring(7, 11);
     }
 }
