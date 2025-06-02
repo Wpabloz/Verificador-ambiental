@@ -39,10 +39,11 @@ class CadastroCFrameTest {
         String nome = "João";
         String usuario = "joao123";
         String senha = "senha123";
-        String cpf = "123.456.789-00";
-        String telefone = "99999-9999";
+        String cpf = "12345678900";
+        String telefone = "99999999999";
 
-        frame.salvarCliente(new Cliente(nome, usuario, senha, cpf, telefone));
+        Cliente cliente = new Cliente(nome, usuario, senha, cpf, telefone);
+        frame.salvarCliente(cliente);
 
         File file = new File(arquivoTeste);
         assertTrue(file.exists(), "Arquivo não foi criado!");
@@ -51,7 +52,7 @@ class CadastroCFrameTest {
         String linha = br.readLine();
         br.close();
 
-        String esperado = "Dados do cliente: " + nome + " | " + usuario + " | " + senha + " | " + cpf + " | " + telefone;
+        String esperado = "Dados do cliente: " + cliente.getNome() + " | " + cliente.getUsername() + " | " + cliente.getSenha() + " | " + cliente.getCpf() + " | " + cliente.getNumeroTel();
         assertEquals(esperado, linha, "Conteúdo do arquivo não corresponde ao esperado.");
     }
 }
