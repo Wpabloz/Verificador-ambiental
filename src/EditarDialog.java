@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class EditarDialog extends JDialog {
     private JTextField nomeField, usuarioField, cnpjField;
@@ -42,10 +43,10 @@ public class EditarDialog extends JDialog {
 
         add(panel);
 
-        eventos(empresa);
+        eventos(empresa, parent);
     }
 
-    private void eventos(Empresa empresa) {
+    private void eventos(Empresa empresa, JFrame parent) {
         // Lógica para salvar a edição
         salvarButton.addActionListener(e -> {
 
@@ -60,14 +61,22 @@ public class EditarDialog extends JDialog {
                 return;
 
             } else  {
+                Empresa empresaAntiga = empresa.copiar();
                 empresa.setNome(nomeField.getText());
                 empresa.setUsername(usuarioField.getText());
                 empresa.setCnpj(cnpjField.getText());
                 empresa.setAtividade(Atividade.valueOf(atividadeField.getSelectedItem().toString()));
 
-                CadastroEFrame.salvarEmpresa(empresa);
+                try {
+                    CadastroEFrame.editarEmpresa(empresaAntiga, empresa);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
 
+                parent.dispose();
                 dispose();
+                DashboardFrame dashboardAtualizado = new DashboardFrame(empresa);
+                dashboardAtualizado.setVisible(true);
             }
 
 

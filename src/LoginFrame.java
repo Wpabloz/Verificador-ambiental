@@ -216,10 +216,7 @@ public class LoginFrame extends JFrame {
             if (lineEmpresa != null) {
                 partsEmpresa = lineEmpresa.split(",");
             }
-            System.out.println(parts[1]);
-            System.out.println(partsEmpresa[1]);
-            System.out.println(parts[2]);
-            System.out.println(partsEmpresa[2]);
+
             // Verifica se o usuário e a senha correspondem aos dados do arquivo
             if (parts.length == 5 && usuario.equals(parts[1]) && senha.equals(parts[2])) {
                 reader.close();

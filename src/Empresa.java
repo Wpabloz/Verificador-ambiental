@@ -19,7 +19,6 @@ public class Empresa extends Usuario {
     }
 
 
-
     public Atividade getAtividade() {
         return atividade;
     }
@@ -59,6 +58,15 @@ public class Empresa extends Usuario {
                 s.substring(12, 14);
     }
 
+    public static String removerMascaraCNPJ(String cnpj) {
+        return cnpj.replaceAll("[^0-9]", "");  // Remove tudo que não for número
+    }
+
+
+    public Empresa copiar() {
+        return new Empresa(this.nome, this.username, this.senha, this.cnpj, this.atividade);
+    }
+
     @Override
     public String toString() {
         return "Empresa{" +
@@ -68,9 +76,5 @@ public class Empresa extends Usuario {
                 ", senha='" + senha + '\'' +
                 ", username='" + username + '\'' +
                 '}';
-    }
-
-    public static String removerMascaraCNPJ(String cnpj) {
-        return cnpj.replaceAll("[^0-9]", "");  // Remove tudo que não for número
     }
 }
