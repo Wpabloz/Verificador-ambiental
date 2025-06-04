@@ -206,9 +206,16 @@ public class LoginFrame extends JFrame {
         String lineEmpresa = readerEmpresa.readLine();
 
 
-        while (line != null) {
-            String[] parts = line.split(",");
-            String[] partsEmpresa = lineEmpresa.split(",");
+        while (line != null || lineEmpresa != null) {
+            String[] parts = new String[5];
+            if (line != null) {
+                parts = line.split(",");
+            }
+
+            String[] partsEmpresa = new String[5];
+            if (lineEmpresa != null) {
+                partsEmpresa = lineEmpresa.split(",");
+            }
             System.out.println(parts[1]);
             System.out.println(partsEmpresa[1]);
             System.out.println(parts[2]);
@@ -222,6 +229,7 @@ public class LoginFrame extends JFrame {
                 return "empresa";
             }
             line = reader.readLine();
+            lineEmpresa = readerEmpresa.readLine();
         }
 
         return "";

@@ -30,4 +30,11 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

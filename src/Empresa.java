@@ -32,6 +32,14 @@ public class Empresa extends Usuario {
         return seloVerde;
     }
 
+    public void setAtividade(Atividade atividade) {
+        this.atividade = atividade;
+    }
+
+    public void setCnpj(String cnpj) {
+
+        this.cnpj = formatarCNPJ(cnpj.replaceAll("[^0-9]", ""));
+    }
 
     //Métodos
     public void gerarSelo() {
@@ -60,5 +68,9 @@ public class Empresa extends Usuario {
                 ", senha='" + senha + '\'' +
                 ", username='" + username + '\'' +
                 '}';
+    }
+
+    public static String removerMascaraCNPJ(String cnpj) {
+        return cnpj.replaceAll("[^0-9]", "");  // Remove tudo que não for número
     }
 }
