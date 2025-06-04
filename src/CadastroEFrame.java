@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class CadastroEFrame extends JFrame {
     JTextField nomeField, usuarioField, cnpjField;
@@ -328,7 +329,33 @@ public class CadastroEFrame extends JFrame {
         return null;
     }
 
-    public static void editarCliente(Empresa empresa, Empresa empresaEditada) {
+    public static void editarEmpresa(Empresa empresa, Empresa empresaEditada) throws IOException {
+        ArrayList<String> linhas = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader("empresa.txt"));
+        String linha;
+        System.out.println(empresa);
+        System.out.println(empresaEditada);
+
+        String linhaAntiga = empresa.getNome() + "," + empresa.getUsername() + "," + empresa.getSenha() + "," + empresa.getCnpj() + "," + empresa.getAtividade();
+        String linhaEditada = empresaEditada.getNome() + "," + empresaEditada.getUsername() + "," + empresaEditada.getSenha() + "," + empresaEditada.getCnpj() + "," + empresaEditada.getAtividade();
+
+        while ((linha = reader.readLine()) != null) {
+            // Se for a linha que queremos, troca
+            if (linha.equals(linhaAntiga)) {
+                linhas.add(linhaEditada);
+            } else {
+                linhas.add(linha);
+            }
+        }
+        reader.close();
+
+        // 2. Escrever de volta no arquivo (sobrescrever)
+        BufferedWriter writer = new BufferedWriter(new FileWriter("empresa.txt"));
+        for (String l : linhas) {
+            writer.write(l);
+            writer.newLine();
+        }
+        writer.close();
 
     }
 }
