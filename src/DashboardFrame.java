@@ -1,9 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class DashboardFrame extends JFrame {
     JPanel mainPanel;
-    JButton editarButton, sairButton, tentarButton;
+    JButton editarButton, sairButton, tentarButton, verSeloButton;
 
 
     public DashboardFrame(Empresa empresaLogada) {
@@ -117,7 +120,7 @@ public class DashboardFrame extends JFrame {
         ));
 
         for (TipoSelo tipoSelo : TipoSelo.values()) {
-            JPanel card = criarCardSelos(tipoSelo);
+            JPanel card = criarCardSelos(tipoSelo, empresaLogada);
             selosPanel.add(card);
         }
 
@@ -149,13 +152,16 @@ public class DashboardFrame extends JFrame {
         });
 
 
+
+
     }
 
-    private JPanel criarCardSelos(TipoSelo tipoSelo) {
+    private JPanel criarCardSelos(TipoSelo tipoSelo, Empresa empresaLogada) {
 
         JPanel card = new JPanel();
         card.setLayout(new BorderLayout());
-        JLabel selo = new JLabel(tipoSelo.toString() + " - " + "80%");
+        double progresso = empresaLogada.getProgressoSelo(tipoSelo);
+        JLabel selo = new JLabel(tipoSelo.toString() + " - " + (progresso * 100) + "%");
         card.add(selo, BorderLayout.WEST);
 
 
@@ -169,12 +175,33 @@ public class DashboardFrame extends JFrame {
         tentarButton.setMinimumSize(new Dimension(100, 30));
         tentarButton.setPreferredSize(new Dimension(100, 30));
         tentarButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        tentarButton.addActionListener(e ->{
+            ChecklistFrame checklistFrame = new ChecklistFrame(tipoSelo, empresaLogada);
+            checklistFrame.setVisible(true);
+            dispose();
+        });
+
+        verSeloButton = new JButton("Ver Selo");
+        verSeloButton.setFont(new Font("Roboto", Font.BOLD, 10));
+        verSeloButton.setForeground(Color.WHITE);
+        verSeloButton.setBackground(Color.decode("#2E7D32"));
+        verSeloButton.setMaximumSize(new Dimension(100, 30));
+        verSeloButton.setMinimumSize(new Dimension(100, 30));
+        verSeloButton.setPreferredSize(new Dimension(100, 30));
+        verSeloButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        verSeloButton.addActionListener(e ->{
+            JDialog dialog = criarDialogSelo(tipoSelo, empresaLogada);
+            dialog.setVisible(true);
+        });
 
 
+        if(empresaLogada.getSelo(tipoSelo).getProgresso() == 1.0){
+            card.add(verSeloButton, BorderLayout.EAST);
+        }else{
+            card.add(tentarButton, BorderLayout.EAST);
+        }
 
-        card.add(tentarButton, BorderLayout.SOUTH);
 
-        card.add(tentarButton, BorderLayout.EAST);
         card.setBackground(Color.WHITE);
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
         card.setBorder(BorderFactory.createCompoundBorder(
@@ -188,5 +215,51 @@ public class DashboardFrame extends JFrame {
     }
 
 
+    private JDialog criarDialogSelo(TipoSelo tipoSelo, Empresa empresaLogada) {
+        JDialog dialog = new JDialog(this, "Selo " + tipoSelo.toString(), true);
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(400, 300);
+        dialog.setLocationRelativeTo(this);
+
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setBackground(Color.WHITE);
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        contentPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)
+        ));
+
+        JLabel titulo = new JLabel("Certificamos que a empresa " + empresaLogada.getNome() + " conquistos o selo de combate/fomentação a(o) " + tipoSelo.toString() + " do programa de certificação " + "EcoSelo.");
+        titulo.setFont(new Font("Roboto", Font.BOLD, 16));
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        titulo.setVerticalAlignment(SwingConstants.CENTER);
+        contentPanel.add(titulo, BorderLayout.NORTH);
+
+        JPanel seloDescricaoPanel = new JPanel(new BorderLayout());
+        seloDescricaoPanel.setBackground(Color.WHITE);
+        seloDescricaoPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createEmptyBorder(10, 10, 10, 10),
+                BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1)
+        ));
+        JLabel seloNome = new JLabel(tipoSelo.toString());
+        seloNome.setFont(new Font("Roboto", Font.BOLD, 16));
+        seloNome.setHorizontalAlignment(SwingConstants.CENTER);
+        seloNome.setVerticalAlignment(SwingConstants.CENTER);
+        seloDescricaoPanel.add(seloNome, BorderLayout.NORTH);
+
+        JLabel seloEmissao = new JLabel("Emissão: " + empresaLogada.getSelo(tipoSelo).getEmissao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        seloEmissao.setFont(new Font("Roboto", Font.PLAIN, 12));
+        seloEmissao.setHorizontalAlignment(SwingConstants.CENTER);
+        seloEmissao.setVerticalAlignment(SwingConstants.CENTER);
+        seloDescricaoPanel.add(seloEmissao, BorderLayout.CENTER);
+
+        contentPanel.add(seloDescricaoPanel, BorderLayout.CENTER);
+        dialog.add(contentPanel, BorderLayout.CENTER);
+        dialog.setVisible(true);
+
+        return dialog;
+
+
+    }
 
 }
