@@ -286,7 +286,7 @@ public class CadastroCFrame extends JFrame {
     }
 
     protected void salvarCliente(Cliente cliente) {
-        try (FileWriter fw = new FileWriter("cliente.txt", true);
+        try (FileWriter fw = new FileWriter("cliente.txt",true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter pw = new PrintWriter(bw)) {
 
