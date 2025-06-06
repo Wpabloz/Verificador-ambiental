@@ -39,7 +39,7 @@ class CadastroEFrameTest {
         String nome = "João";
         String usuario = "joao123";
         String senha = "senha123";
-        String cnpj = "12345678900000";
+        String cnpj = "12.345.678/9123-40";
         Atividade atividade = Atividade.ESPORTES;
 
         Empresa empresa = new Empresa(nome, usuario, senha, cnpj, atividade);
@@ -48,11 +48,18 @@ class CadastroEFrameTest {
         File file = new File(arquivoTeste);
         assertTrue(file.exists(), "Arquivo não foi criado!");
 
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String linha = br.readLine();
-        br.close();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String linha = br.readLine();
+            assertNotNull(linha, "Nenhuma linha foi lida do arquivo!");
 
-        String esperado = empresa.getNome() + "," + empresa.getUsername() + "," + empresa.getSenha() + "," + empresa.getCnpj() + "," + empresa.getAtividade();
-        assertEquals(esperado, linha, "Conteúdo do arquivo não corresponde ao esperado.");
+            String[] dados = linha.split(",");
+
+            assertEquals(nome, dados[0], "Nome incorreto");
+            assertEquals(usuario, dados[1], "Username incorreto");
+            assertEquals(senha, dados[2], "Senha incorreta");
+            assertEquals(cnpj, dados[3], "CNPJ incorreto");
+            assertEquals("ESPORTES", dados[4], "Atividade incorreta");
+        }
     }
+
 }
