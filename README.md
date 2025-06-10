@@ -1,119 +1,60 @@
 # 🌱 Verificador Ambiental
 
-Sistema Java com interface gráfica para verificar a conformidade ambiental de estabelecimentos, gerando um **selo verde** para empresas que estão de acordo com as normas ambientais.
+**Verificador Ambiental** é um sistema desenvolvido como projeto acadêmico que visa promover práticas sustentáveis em empresas, por meio da verificação de critérios ambientais com base nos Objetivos de Desenvolvimento Sustentável (ODS). 
 
-## 🛠️ Instalar o ambiente
+O projeto oferece uma plataforma com dois tipos de usuários: **Empresa** e **Cliente**, cada um com funcionalidades específicas para apoiar a transparência, o engajamento ambiental e a responsabilidade socioambiental.
 
-### Git instalado 
+---
 
-[![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/downloads/win)
+## 🚀 Funcionalidades
 
-### Java instalado
+### 👤 Empresa
+- Cadastro e login da empresa
+- Checklist ambiental baseado nos selos ODS
+- Gerenciamento de requisitos e status dos selos conquistados
+- Recebimento de avaliações e denúncias de clientes
+- Emissão de selo verde (caso atenda aos critérios)
 
-[![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/pt-BR/download/)
+### 👥 Cliente
+- Cadastro e login de cliente
+- Pesquisa por empresas cadastradas
+- Avaliação da conduta ambiental das empresas
+- Envio de denúncias com justificativa
 
-### Editor de código
+---
 
-[![IntelliJ](https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)](	https://img.shields.io/badge/IntelliJ_IDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
+## 💡 Objetivo do Projeto
 
+O sistema tem como principal objetivo:
 
-## ✅ Clonando o Repositório
+> **Fomentar a adoção de práticas sustentáveis em empresas através de um sistema transparente, acessível e interativo, baseado nos ODS da ONU.**
 
-1. No seu perfil, vá até o repositório forkeado.
-2. Clique em **`Code`** e copie a URL.
-3. No terminal, execute:
+Com isso, espera-se criar uma cultura de responsabilidade ambiental e facilitar o reconhecimento de empresas comprometidas com o meio ambiente.
 
-```bash
-git clone https://github.com/Wpabloz/Verificador-ambiental.git
-```
-E entre na pasta do projeto:
-```bash
-cd verificador-ambiental
-```
+---
 
-## 🌿 Crie sua própria branch
+## 🛠️ Tecnologias Utilizadas
 
-Antes de começar a programar, crie um branch com o seu nome ou a funcionalidade que vai fazer:
-``` bash
-git checkout -b nome-do-branch
-```
-Esse comando já cria e muda para a branch criada.
+- **Java** com **Swing** para a interface gráfica
+- Armazenamento **local** em arquivos `.txt`
+- Controle de versão com **Git** e hospedagem no **GitHub**
 
-## 💾 Salvar o projeto
+---
 
-### 1. Verifique os arquivos alterados:
-```bash
-git status
-```
-### 2. Adicione todos os arquivos alterados:
-```bash
-git add .
-```
-ou adicione especificamente:
-```bash
-git add nome_do_arquivo
-```
-### 3. Faça o commit, especificando a mudança:
-```bash
-git commit -m "Descreva a mudança feita no código"
-```
-## 🚀 Enviando sua branch para o Github
+## 🎓 Sobre o Projeto
 
-```bash
-git push origin nome-do-branch
-```
+Este projeto foi desenvolvido como parte de um trabalho interdisciplinar do curso de Análise e Desenvolvimento de Sistemas, com foco em aplicar conceitos de:
+- Programação orientada a objetos (POO)
+- Engenharia de software
+- Interfaces gráficas (GUI)
+- Sustentabilidade e tecnologia
 
-## 🔀 Criando um Pull Request
-1. Acesse o repositório no GitHub.
+---
 
-2. Vai aparecer a opção: ```Compare & pull request.```
+## 🧑‍💻 Autores
 
-3. Clique, explique o que fez e envie o Pull Request.
-
-## 🔄 Atualizando o repositório
-
-Quando alguém atualizar o repositório, antes de começar a trabalhar, atualize o seu:
-```bash
-git pull origin main
-```
-
-Se você estiver em sua própria branch, pode fazer isso antes:
-```bash
-git checkout main
-git pull origin main
-```
-
-Depois, se quiser, volte para seu branch:
-```bash
-git checkout nome-da-sua-branch
-```
-
-
-## 🛡️ Dicas importantes:
-
-✅ Nunca programe direto no main.
-✅ Sempre use branchs para novas funcionalidades.
-✅ Faça commits pequenos e bem descritos.
-✅ Sempre puxe (pull) antes de começar a programar.
-
-## 📚 Fluxo padrão de trabalho
-
-1. ```git pull``` → Para pegar as novidades.
-
-2. ```git checkout -b nova-funcionalidade``` → Cria um branch.
-
-3. Programa e salva.
-
-4. ```git add .``` → Adiciona.
-
-5. ```git commit -m "O que fez"``` → Confirma.
-
-6. ```git push origin nome-do-branch``` → Envia.
-
-7. Cria um Pull Request no GitHub.
-
-
-
-
-
+- [![Badge](https://img.shields.io/badge/MagnoCavalcanti-dev-blue?style=flat-square&logo=github)](https://github.com/MagnoCavalcanti)
+- [![Badge](https://img.shields.io/badge/Rammon17-dev-blue?style=flat-square&logo=github)](https://github.com/Rammon17)
+- [![Badge](https://img.shields.io/badge/Wpabloz-dev-blue?style=flat-square&logo=github)](https://github.com/Wpabloz)
+---
 
